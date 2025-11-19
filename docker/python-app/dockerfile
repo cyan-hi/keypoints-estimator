@@ -1,0 +1,36 @@
+# NVIDIA 공식 이미지: TensorRT 10 + PyTorch 2.4 + CUDA 12.4 + torch-tensorrt 완벽 설치됨
+FROM nvcr.io/nvidia/tensorrt:24.02-py3
+
+ENV PYTHONPATH=/workspace/python:${PYTHONPATH}
+
+# 시간대 설정 (한국)
+ENV TZ=Asia/Seoul
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# 필요한 시스템 패키지 (opencv 등)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglib2.0-0 libgl1-mesa-glx libsm6 libxext6 libxrender1 \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# 작업 디렉토리
+WORKDIR /app
+
+# 당신의 requirements.txt만 설치 (이미 PyTorch/TensorRT 다 있으니까 중복 설치 안 됨)
+COPY ./code/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 코드 복사 (개발 중엔 volumes로 덮어씌워질 거라서 상관없음)
+COPY ./code /app
+
+# Redis 연결용 환경 변수
+ENV REDIS_HOST=redis
+ENV REDIS_PORT=6379
+
+
+CMD ["/bin/bash"]
+
+# 실행 명령어 (FastAPI면 uvicorn, 일반 스크립트면 python main.py)
+# CMD ["python", "main.py"]
+# 또는 FastAPI면:
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
