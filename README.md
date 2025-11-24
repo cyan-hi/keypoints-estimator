@@ -11,7 +11,7 @@
 | yolov11m.pt (PyTorch)        | rtmpose_m.engine            | 16.5 FPS     | PyTorch 기준                  |
 | yolov11m_fp32.engine         | rtmpose_m.engine            | 18.2 FPS     | TensorRT FP32                 |
 | yolov11m_fp16.engine         | rtmpose_m.engine            | 19.1 FPS     | Detector만 FP16               |
-| **yolov11m_fp16.engine**     | **rtmpose_m_fp16.engine**   | **20.8 FPS** | **최적화 완료 → 실시간 돌파!** |
+| **yolov11m_fp16.engine**     | **rtmpose_m_fp16.engine**   | **20.8 FPS** | **최적화 완료 → 20fps** |
 
 → **1650 Super 4GB로도 20.8 FPS**
 ## 실행 흐름도
@@ -46,16 +46,16 @@ docker-compose exec python-app bash
 python weights/make_engines.py
 
 # 5. 실행 
-# config에서 실행 할 영상 파일 및 모델 파일 경로 확인
-# config에서 output 형태 확인 ( "video" or "redis")
+# cfg/config에서 실행 할 영상 파일 및 모델 파일 경로 확인
+# cfg/config에서 output 형태 확인 ( "video" or "redis")
 python main.py
 ```
 
 ## Config 예시 및 설명
-```json
+```plaintext
 {
     "stream": {
-        "source": "/app/video/test.mp4", // **영상 경로
+        "source": "/app/video/test.mp4", // 영상 경로
         "output_mode": "redis", // video(video 저장) or redis(redis 전송)
         "video": {
             "output_path": "/app/output/output.mp4",
@@ -114,8 +114,8 @@ keypoints-estimator/
 │   │   └── make_engines.py       # engine 변환 
 │   └── main.py                   # 메인 실행 파일
 ├── docker                        # docker 폴더
-│   ├── python-app                # python-app 도커파일
-│   │   └── dockerfile
+│   ├── python-app                
+│   │   └── dockerfile            # python-app 도커파일
 │   └── redis
 │       ├── dockerfile            # redis 도커파일
 │       └── redis.conf            # redis 설정 파일
