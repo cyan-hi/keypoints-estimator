@@ -1,9 +1,9 @@
 import os
 import subprocess
 
-def build_yolo_engine(model="yolov11_m.pt", fp16=True, imgsz=640):
+def build_yolo_engine(model="yolov11_m.pt", fp16=True):
     model_path = f"weights/{model}"
-    engine_name = model.replace(".pt", "_fp16.engine" if fp16 else ".engine")
+    engine_name = model.replace(".pt", ".engine" if fp16 else ".engine")
     engine_path = f"weights/{engine_name}"
 
     if os.path.exists(engine_path):
