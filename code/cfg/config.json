@@ -1,0 +1,37 @@
+{
+    "stream": {
+        "source": "/app/video/test.avi",
+        "output_mode": "redis",
+        "video": {
+            "output_path": "/app/output/output.mp4",
+            "fps": 20
+        },
+        "redis": {
+            "host": "redis",
+            "port": 6379,
+            "channel": "ai-result"
+        }
+    },
+    "detector": {
+        "weight": "/app/weights/yolov11_m_fp16.engine",
+        "device": "cuda:0",
+        "confidence": 0.35,
+        "iou_threshold": 0.75,
+        "max_det": 10
+    },
+    "keypoint_estimator": {
+        "weight": "/app/weights/rtmpose_m_fp16.engine"
+    },
+    "tracker": {
+        "reid_checkpoint": "/app/tracker/deep/checkpoint/ckpt.t7",
+        "max_cosine_distance": 0.6,
+        "min_confidence": 0.3,
+        "nms_max_overlap": 0.2,
+        "max_iou_distance": 0.7,
+        "max_age": 70,
+        "n_init": 3,
+        "nn_budget": null,
+        "use_appearence": true,
+        "use_cuda": true
+    }
+}
