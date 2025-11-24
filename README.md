@@ -1,9 +1,9 @@
-# 실시간 사람 추적 & 17점 키포인트 추정 시스템  
+# 실시간 사람 추적 & 키포인트 추정 시스템  
 **YOLOv11 + DeepSORT + RTMPose-m (TensorRT)**  
 **GTX 1650 Super (4GB) 실측 20.8 FPS**
 
 ## 한 줄 요약
-GTX 1650 Super 한 대로 **YOLOv11 + DeepSORT + RTMPose 풀 파이프라인 실시간 구동 성공**  
+**YOLOv11 + DeepSORT + RTMPose 풀 파이프라인 실시간 구동 성공**  
 
 ## GTX 1650 Super 실측 성능 (전체 파이프라인 포함)
 | Detector 엔진                | Pose 엔진                   | 실측 FPS     | 비고                          |
@@ -29,20 +29,23 @@ GTX 1650 Super 한 대로 **YOLOv11 + DeepSORT + RTMPose 풀 파이프라인 실
 ## 실행 방법
 ```bash
 # 1. 클론 받기
-git clone https://github.com/yourname/your-repo.git
-cd your-repo
+git clone https://github.com/cyan-hi/keypoints-estimator.git
+cd keypoints-estimator
 
 # 2. 처음 한 번만 (Docker 이미지 빌드 + 컨테이너 시작)
+docker --version #도커 설치 확인
+docker-compose --version #도커 컴포즈 설치 확인
 docker-compose up --build -d
 # (시간이 좀 걸릴 수 있음)
 
 # 3. 컨테이너 안으로 들어가기
-docker-compose exec app bash
+docker-compose exec python-app bash
 
 # 4. 모델 변화
+# 시간이 좀 걸릴 수 있음
 python weights/make_engines.py
 
-# 5. 실행 (진짜 이 한 줄!)
+# 5. 실행 
 # config에서 실행 할 영상 파일 및 모델 파일 경로 확인
 # config에서 output 형태 확인 ( "video" or "redis")
 python main.py
@@ -137,6 +140,7 @@ protobuf==4.21.2
 ipython==8.29.0
 ultralytics==8.3.57
 redis==7.1.0
+onnxscript==0.5.6
 ```
 
 ## Docker 없이 로컬에서 돌리고 싶으신 분들
