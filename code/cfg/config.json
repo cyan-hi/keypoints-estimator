@@ -13,7 +13,7 @@
         }
     },
     "detector": {
-        "weight": "/app/weights/yolov11_m_fp16.engine",
+        "weight": "/app/weights/yolov11_m.pt",
         "device": "cuda:0",
         "confidence": 0.35,
         "iou_threshold": 0.75,
