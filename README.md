@@ -39,7 +39,10 @@ docker-compose up --build -d
 # 3. 컨테이너 안으로 들어가기
 docker-compose exec app bash
 
-# 4. 실행 (진짜 이 한 줄!)
+# 4. 모델 변화
+python weights/make_engines.py
+
+# 5. 실행 (진짜 이 한 줄!)
 # config에서 실행 할 영상 파일 및 모델 파일 경로 확인
 # config에서 output 형태 확인 ( "video" or "redis")
 python main.py
@@ -99,7 +102,13 @@ keypoints-estimator/
 │   │   └── trt_engine.py         # tensorRT 엔진 로더
 │   ├── pipeline/                 
 │   │   └── stream_runner.py      # 모델 추론 및 파이프라인 관리
+│   ├── video/                    # 비디오  
+│   │   └── test.avi              # 테스트용 비디오
 │   ├── tracker/                  # deepsort 관련 코드
+│   ├── weights/                  # 모델 파일      
+│   │   ├──rtmpose_m.onnx
+│   │   ├──yolov11_m.pt
+│   │   └── make_engines.py       # engine 변환 
 │   └── main.py                   # 메인 실행 파일
 ├── docker                        # docker 폴더
 │   ├── python-app                # python-app 도커파일
@@ -134,7 +143,16 @@ redis==7.1.0
 로컬 환경은 CUDA 11.8~12.x + TensorRT 8.6 + 정확한 의존성 버전이 필요해서
 테스트 환경마다 다르게 동작할 수 있습니다.
 
-## 필요시 
-- trtexec --onnx=model.onnx --saveEngine=model_fp16.engine
+## 참고자료
 
+- YOLO (Ultralytics)  
+  https://github.com/ultralytics/ultralytics
+
+- RTMPose (MMPose)  
+  https://github.com/open-mmlab/mmpose
+
+- DeepSORT (Original)  
+  https://github.com/nwojke/deep_sort
+
+- 테스트용 영상 ai-hub
 
