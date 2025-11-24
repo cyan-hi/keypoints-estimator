@@ -23,9 +23,17 @@ def load_config():
 
 def setting_logger():
     log_config_file = "./cfg/logger.yaml"
-    if not os.path.isfile(log_config_file):
-        raise FileNotFoundError
 
-    with open(log_config_file, 'rt') as f:
-        config = yaml.safe_load(f.read())
+    # 1. logger.yaml 확인
+    if not os.path.isfile(log_config_file):
+        raise FileNotFoundError(f"Logger config not found: {log_config_file}")
+
+    # 2. log 폴더 자동 생성
+    log_dir = "./log"
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir, exist_ok=True)
+
+    # 3. YAML 로드 후 설정 적용
+    with open(log_config_file, "rt", encoding="utf8") as f:
+        config = yaml.safe_load(f)
         dictConfig(config)
