@@ -1,11 +1,11 @@
 import time
 import logging
-
 import cv2
 import torch
 import numpy as np
 import redis
 import json
+import os
 
 from tracker.deep_sort import deepsort_update
 from utils.draw_utils import draw_bbox_skeleton
@@ -29,6 +29,9 @@ class StreamRunner:
             self.output_path = video_cfg.get("output_path", "output.mp4")
             self.fps = video_cfg.get("fps", 30)
             self.writer = None
+            output_dir = os.path.dirname(self.output_path)
+            if output_dir and not os.path.exists(output_dir):
+                os.makedirs(output_dir, exist_ok=True)
 
         # REDIS 설정
         self.send_redis = (self.output_mode == "redis")
