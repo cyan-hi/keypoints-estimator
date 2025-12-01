@@ -2,6 +2,12 @@
 **YOLOv11 + DeepSORT + RTMPose-m (TensorRT)**  
 **GTX 1650 Super (4GB) 실측 20.8 FPS**
 
+<p align="center">
+  <a href="output.gif">
+    <img src="output.gif" width="650" />
+  </a>
+</p>
+
 ## 한 줄 요약
 **YOLOv11 + DeepSORT + RTMPose 풀 파이프라인 실시간 구동 성공**  
 
