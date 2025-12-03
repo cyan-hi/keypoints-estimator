@@ -51,33 +51,33 @@
 
 ## Technical Highlights
 
-### ✔ TensorRT 엔진 최적화 (FP32 → FP16)
+### TensorRT 엔진 최적화 (FP32 → FP16)
 - YOLOv11 / RTMPose 모두 엔진 변환  
 - 약 12~20% 성능 향상  
 - 메모리 사용 최적화 (약 2.2~2.8GB)
 
-### ✔ Keypoints 후처리 로직 직접 구현
+### Keypoints 후처리 로직 직접 구현
 - heatmap → 좌표 변환  
 - bbox alignment  
 - skeleton 연결  
 - 시각화 렌더링
 
-### ✔ 실시간 파이프라인 설계
+### 실시간 파이프라인 설계
 - frame 단위 처리 흐름  
 - non-blocking  
 - DeepSORT ReID distance 튜닝
 
-### ✔ Redis Publish 지원
+### Redis Publish 지원
 - track_id + keypoints + bbox를 JSON 형태로 송신  
 - 실시간 제어 시스템과 연동 가능
 
-### ✔ Docker 기반 실행환경 제공
+### Docker 기반 실행환경 제공
 - python-app + redis 멀티 컨테이너  
 - reproducible environment
 
 ---
 
-## ▶ 실행 방법
+## Execution
 
 ### 1) Clone
 ```
