@@ -2,8 +2,18 @@
 **YOLOv11 + DeepSORT + RTMPose-m (TensorRT)**  
 **GTX 1650 Super(4GB) 기준 최대 20.8 FPS 실시간 처리**
 ---
-<p align="center"> <a href="output.gif"> <img src="output.gif" width="650" /> </a> </p>
-
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>단일 인물</b></td>
+      <td align="center"><b>다중 인물</b></td>
+    </tr>
+    <tr>
+      <td><img src="single-person.gif" width="500"></td>
+      <td><img src="multi-person.gif" width="500"></td>
+    </tr>
+  </table>
+</div>
 ## Overview
 본 프로젝트는 **사람 검지 → 추적 → 17 Keypoints 추정 → 영상 출력 또는 Redis 송신**까지  
 실시간으로 처리하는 End-to-End 파이프라인입니다.
@@ -61,11 +71,6 @@
 - bbox alignment  
 - skeleton 연결  
 - 시각화 렌더링
-
-### 실시간 파이프라인 설계
-- frame 단위 처리 흐름  
-- non-blocking  
-- DeepSORT ReID distance 튜닝
 
 ### Redis Publish 지원
 - track_id + keypoints + bbox를 JSON 형태로 송신  
