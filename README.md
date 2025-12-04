@@ -14,6 +14,7 @@
     </tr>
   </table>
 </div>
+
 ## Overview
 본 프로젝트는 **사람 검지 → 추적 → 17 Keypoints 추정 → 영상 출력 또는 Redis 송신**까지  
 실시간으로 처리하는 End-to-End 파이프라인입니다.
